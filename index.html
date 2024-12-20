@@ -465,14 +465,14 @@
   }
 
   function ShareScreenshot(base64Image) {
-    const imageBlob = base64ToBlob(base64Image, 'image/jpeg');
+    const imageBlob = base64ToBlob(base64Image, 'image/png');
     const imageURL = URL.createObjectURL(imageBlob);
 
     if (navigator.share) {
       navigator.share({
         title: 'Check this screenshot!',
         text: 'Here is a screenshot I wanted to share with you.',
-        files: [new File([imageBlob], 'screenshot.jpeg', { type: 'image/jpeg' })]
+        files: [new File([imageBlob], 'screenshot.png', { type: 'image/png' })]
       })
               .then(() => console.log('Shared successfully'))
               .catch((error) => console.error('Error sharing:', error));
