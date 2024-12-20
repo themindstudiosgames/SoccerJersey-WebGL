@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Unity WebGL Player | DefaultName</title>
+    <title>Unity WebGL Player | Splink</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="manifest" href="manifest.webmanifest">
@@ -159,8 +159,8 @@
           frameworkUrl: buildUrl + "/SoccerJersey-WebGL.framework.js",
           codeUrl: buildUrl + "/SoccerJersey-WebGL.wasm",
           streamingAssetsUrl: "StreamingAssets",
-          companyName: "DefaultCompany",
-          productName: "DefaultName",
+          companyName: "The Mind Studios",
+          productName: "Splink",
           productVersion: "1.0",
           showBanner: unityShowBanner,
         };
@@ -464,46 +464,22 @@
           document.getElementById("errorText").innerHTML = error;
       }
 
-      function centerScreenshotDiv() {
-        const screenshotDiv = document.getElementById('screenshotDiv');
-        if (screenshotDiv.style.visibility === 'visible') {
-          // Используем visualViewport, если оно доступно
-          const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-          const viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      function ShowScreenshot(dataUrl){
+          var screenshotDiv = document.getElementById("screenshotDiv");
+          screenshotDiv.style.opacity = 1;
+          screenshotDiv.style.visibility = "visible";
 
-          screenshotDiv.style.top = `${(viewportHeight - screenshotDiv.offsetHeight) / 2}px`;
-          screenshotDiv.style.left = `${(viewportWidth - screenshotDiv.offsetWidth) / 2}px`;
-          screenshotDiv.style.position = "absolute"; // Убедимся, что позиционирование абсолютное
-        }
+          document.getElementById("screenshotImg").src = dataUrl;
+          document.getElementById("screenshotImg").style.width = "80vw";
+          document.getElementById("screenshotImg").style.height = 80 / window.innerWidth * window.innerHeight + "vw";
       }
 
-      // Пересчет позиции при изменении размера окна
-      window.addEventListener('resize', centerScreenshotDiv);
-
-      // Пересчет позиции при изменении visualViewport (актуально для iOS)
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', centerScreenshotDiv);
-      }
-
-      function ShowScreenshot(dataUrl) {
-        const screenshotDiv = document.getElementById('screenshotDiv');
-        screenshotDiv.style.opacity = 1;
-        screenshotDiv.style.visibility = 'visible';
-
-        const img = document.getElementById('screenshotImg');
-        img.src = dataUrl;
-        img.style.width = '80vw';
-        img.style.height = `${(80 / window.innerWidth) * window.innerHeight}vw`;
-
-        centerScreenshotDiv(); // Центрирование сразу при открытии
-      }
-
-      function HideScreenshot() {
-        const screenshotDiv = document.getElementById('screenshotDiv');
-        screenshotDiv.style.opacity = 0;
-        setTimeout(() => {
-          screenshotDiv.style.visibility = 'hidden';
-        }, 500);
+      function HideScreenshot(){
+          var screenshotDiv = document.getElementById('screenshotDiv');
+          screenshotDiv.style.opacity = 0;
+          setTimeout(()=>{
+            screenshotDiv.style.visibility = 'hidden';
+          }, 500);
       }
 
       function ShowConfirmUrl(url){
